@@ -38,7 +38,9 @@ orig[!(orig %in% new)]
 nzv <- nearZeroVar(train, saveMetrics = FALSE)
 fil_train <- train[, -nzv]
 write.csv(fil_train[train_index, ], file='train80.csv')
-write.csv(fil_train[!train_index, ], file='train20.csv')
+write.csv(fil_train[-train_index, ], file='train20.csv')
+
+nrow(fil_train[-train_index, ])/nrow(train) * 100
 
 # The optimal power transformation is found via the Box-Cox Test where
 # -1. is a reciprocal
